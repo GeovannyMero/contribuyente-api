@@ -1,8 +1,16 @@
 const workoutService = require('../services/workoutService');
 
 const getAllworkouts = (req, res) => {
-    const allWorkouts = workoutService.getAllworkouts();
-     res.send({status: 'OK', data: allWorkouts});
+    try {
+        const allWorkouts = workoutService.getAllworkouts();
+        res.send({ status: 'OK', data: allWorkouts });
+    }
+    catch (error) {
+        res
+            .status(error?.status || 500)
+            .send({ status: 'FALIED' })
+    }
+
 
 }
 
@@ -14,14 +22,16 @@ const getOneWorkout = (req, res) => {
 const createNewWorkout = (req, res) => {
     const { body } = req;
 
-    if(
+    if (
         !body.name ||
         !body.mode ||
         !body.equipment ||
         !body.exercise ||
         !body.trainerTips
-    ){
-        return;
+    ) {
+        res
+            .status(400)
+            .send({ status: 'FAILED' })
     }
 
     const newWorkout = {
@@ -30,10 +40,10 @@ const createNewWorkout = (req, res) => {
         equipment: body.equipment,
         exercises: body.exercises,
         trainerTips: body.trainerTips,
-      };
+    };
 
     const createdWorkout = workoutService.updateOneWorkout(newWorkout);
-    res.status(201).send({status:'OK',data: createdWorkout});
+    res.status(201).send({ status: 'OK', data: createdWorkout });
 };
 
 const updateOneWorkout = (req, res) => {
