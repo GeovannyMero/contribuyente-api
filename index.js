@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const db = require('./src/database/Connection');
 //v1
 const v1WorkoutRouter = require('./src/v1/routes/workoutRoutes');
 //contribuyente API
