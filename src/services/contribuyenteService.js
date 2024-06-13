@@ -1,9 +1,9 @@
 const contribuyenteData = require('../database/Contribuyente')
 
 
-const getByProvince = (provinceName) => {
+const getByProvince = async (provinceName) => {
     try {
-        var data = contribuyenteData.getbyProvince(provinceName);
+        var data = await contribuyenteData.getbyProvince(provinceName);
         return data;
     } catch (error) {
         throw error;

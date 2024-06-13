@@ -1,8 +1,8 @@
 const contribuyenteModel = require('../database/Models/contribuyentes')
 
-const getbyProvince = (provinceName) => {
+const getbyProvince = async (provinceName) => {
     try {
-        var data = contribuyenteModel
+        var data = await contribuyenteModel
             .find({ 'provincia_juridiccion': provinceName.toUpperCase() })
             .select('-_id')
             .limit(10)

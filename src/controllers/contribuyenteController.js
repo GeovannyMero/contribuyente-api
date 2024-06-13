@@ -1,12 +1,10 @@
 const contribuyenteService = require('../services/contribuyenteService');
 
 
-const getByProvince = (req, res) => {
+const getByProvince = async (req, res) => {
     try {
-        console.log(req.query);
-        const contribuyentes = contribuyenteService.getByProvince(req.query.name);
-        console.log(contribuyentes)
-        return res.send({ status: 'OK' });
+        const contribuyentes = await  contribuyenteService.getByProvince(req.query.name);
+        return res.send({ status: 'OK', data: contribuyentes });
     } catch (error) {
         res
             .status(500)
