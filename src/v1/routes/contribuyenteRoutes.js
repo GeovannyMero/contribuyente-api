@@ -7,4 +7,6 @@ const router = express.Router();
 
 router.get('/provincia', contribuyenteController.getByProvince);
 
+router.get('/ruc/:ruc', contribuyenteController.getByRuc)
+
 module.exports = router;

@@ -12,5 +12,25 @@ const getByProvince = async (req, res) => {
     }
 }
 
+const getByRuc = async (req, res) => {
+    try {
+        var paramruc = req.params.ruc;
+        console.log(paramruc);
+        var contribuyente = await contribuyenteService.getByRuc(paramruc);
 
-module.exports = { getByProvince }
+        if(contribuyente == null){
+            return res
+            .status(404)
+            .send({status: 'Not Found', data: null});
+        }else{
+            return res.send({status:'OK', data: contribuyente});
+        }
+    } catch (error) {
+        res
+        .status(500)
+        .send({status: 'DAILED'});
+    }
+}
+
+
+module.exports = { getByProvince, getByRuc }

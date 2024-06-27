@@ -10,4 +10,15 @@ const getByProvince = async (provinceName) => {
     }
 } 
 
-module.exports = {getByProvince}
+
+const getByRuc = async (ruc) => {
+    try {
+        var data = await contribuyenteData.getByRUC(ruc);
+        return data;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+module.exports = {getByProvince, getByRuc}

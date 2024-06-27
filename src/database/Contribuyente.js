@@ -14,4 +14,23 @@ const getbyProvince = async (provinceName) => {
 }
 
 
-module.exports = { getbyProvince }
+const getByRUC = async (ruc) => {
+    try {
+        
+        var data = await contribuyenteModel
+        .findOne({'ruc': ruc})
+        .select('-_id')
+        .exec();
+        console.log(data);
+        if(data == null){
+            console.log('No existe data');
+        }
+        return data;
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+
+module.exports = { getbyProvince, getByRUC }
